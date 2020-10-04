@@ -1127,6 +1127,7 @@
 #include "code\game\objects\items\implants\implantuplink.dm"
 #include "code\game\objects\items\leosight\knife.dm"
 #include "code\game\objects\items\leosight\misc.dm"
+#include "code\game\objects\items\leosight\reagents.dm"
 #include "code\game\objects\items\melee\energy.dm"
 #include "code\game\objects\items\melee\misc.dm"
 #include "code\game\objects\items\melee\transforming.dm"
