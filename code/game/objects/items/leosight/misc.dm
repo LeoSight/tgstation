@@ -12,6 +12,6 @@
 
 /obj/item/stamp/ls_kiss
 	name = "kiss stamp"
-	icon = 'icons/obj/bureaucracy.dmi'
+	icon = 'icons/obj/leosight.dmi'
 	icon_state = "stamp-kiss"
 	inhand_icon_state = "stamp"
