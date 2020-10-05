@@ -23,3 +23,19 @@
 	results = list(/datum/reagent/toxin/ls_lobbarika = 3)
 	required_reagents = list(/datum/reagent/uranium/radium = 1, /datum/reagent/potassium = 1, /datum/reagent/chlorine = 1)
 	required_temp = 380
+
+
+/datum/reagent/ls_freunzgas
+	name = "Freunz gas"
+	description = "Yellowish gas that causes weakness."
+	reagent_state = GAS
+	color = "#C6B23B"
+	taste_description = "gas"
+
+/datum/reagent/ls_freunzgas/on_mob_life(mob/living/carbon/M)
+	M.adjustStaminaLoss(10, 0)
+	..()
+
+/obj/item/reagent_containers/glass/bottle/ls_freunzgas
+	name = "freunz gas bottle"
+	list_reagents = list(/datum/reagent/ls_freunzgas = 30)
