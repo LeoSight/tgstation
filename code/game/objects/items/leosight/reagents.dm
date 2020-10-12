@@ -44,7 +44,7 @@
 
 /datum/chemical_reaction/ls_lobbarika
 	results = list(/datum/reagent/toxin/ls_lobbarika = 2)
-	required_reagents = list(/datum/reagent/ls_ardor = 1, /datum/reagent/radium = 1)
+	required_reagents = list(/datum/reagent/ls_ardor = 1, /datum/reagent/uranium/radium = 1)
 
 
 // FREUNZ GAS
@@ -65,5 +65,5 @@
 	list_reagents = list(/datum/reagent/ls_freunzgas = 30)
 
 /datum/chemical_reaction/ls_freunzgas
-	results = list(/datum/reagent/toxin/ls_freunzgas = 2)
+	results = list(/datum/reagent/ls_freunzgas = 2)
 	required_reagents = list(/datum/reagent/ls_ardor = 1, /datum/reagent/chlorine = 1)
