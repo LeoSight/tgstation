@@ -54,9 +54,6 @@
 /obj/item/clothing/mask/facehugger/attackby(obj/item/O, mob/user, params)
 	return O.attack_obj(src, user)
 
-/obj/item/clothing/mask/facehugger/attack_alien(mob/user) //can be picked up by aliens
-	return attack_hand(user)
-
 //ATTACK HAND IGNORING PARENT RETURN VALUE
 /obj/item/clothing/mask/facehugger/attack_hand(mob/user)
 	if((stat == CONSCIOUS && !sterile) && !isalien(user))
@@ -253,10 +250,6 @@
 		return FALSE
 	if(M.getorgan(/obj/item/organ/alien/hivenode))
 		return FALSE
-
-	if(ismonkey(M))
-		return TRUE
-
 	var/mob/living/carbon/C = M
 	if(ishuman(C) && !(ITEM_SLOT_MASK in C.dna.species.no_equip))
 		var/mob/living/carbon/human/H = C

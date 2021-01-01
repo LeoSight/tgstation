@@ -54,7 +54,6 @@ Borg Hypospray
 		regenerate_reagents()
 		charge_timer = 0
 
-	//update_icon()
 	return 1
 
 // Use this to add more chemicals for the borghypo to produce.
@@ -96,7 +95,7 @@ Borg Hypospray
 /obj/item/reagent_containers/borghypo/proc/regenerate_reagents()
 	if(iscyborg(src.loc))
 		var/mob/living/silicon/robot/R = src.loc
-		if(R && R.cell)
+		if(R?.cell)
 			for(var/i in 1 to reagent_ids.len)
 				var/datum/reagents/RG = reagent_list[i]
 				if(RG.total_volume < RG.maximum_volume) 	//Don't recharge reagents and drain power if the storage is full.
@@ -181,12 +180,17 @@ Borg Hypospray
 
 /obj/item/reagent_containers/borghypo/syndicate
 	name = "syndicate cyborg hypospray"
-	desc = "An experimental piece of Syndicate technology used to produce powerful restorative nanites used to very quickly restore injuries of all types. Also metabolizes potassium iodide, for radiation poisoning, and morphine, for offense."
+	desc = "An experimental piece of Syndicate technology used to produce powerful restorative nanites used to very quickly restore injuries of all types. Also metabolizes potassium iodide for radiation poisoning, inacusiate for ear damage and morphine for offense."
 	icon_state = "borghypo_s"
 	charge_cost = 20
 	recharge_time = 2
-	reagent_ids = list(/datum/reagent/medicine/syndicate_nanites, /datum/reagent/medicine/potass_iodide, /datum/reagent/medicine/morphine)
-	bypass_protection = 1
+	reagent_ids = list(
+		/datum/reagent/medicine/syndicate_nanites,
+		/datum/reagent/medicine/inacusiate,
+		/datum/reagent/medicine/potass_iodide,
+		/datum/reagent/medicine/morphine,
+	)
+	bypass_protection = TRUE
 	accepts_reagent_upgrades = FALSE
 
 /*
@@ -225,7 +229,7 @@ Borg Shaker
 /obj/item/reagent_containers/borghypo/borgshaker/regenerate_reagents()
 	if(iscyborg(src.loc))
 		var/mob/living/silicon/robot/R = src.loc
-		if(R && R.cell)
+		if(R?.cell)
 			for(var/i in modes) //Lots of reagents in this one, so it's best to regenrate them all at once to keep it from being tedious.
 				var/valueofi = modes[i]
 				var/datum/reagents/RG = reagent_list[valueofi]
