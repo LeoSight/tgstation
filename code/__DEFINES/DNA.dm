@@ -1,6 +1,6 @@
 /*ALL DNA, SPECIES, AND GENETICS-RELATED DEFINES GO HERE*/
 
-#define CHECK_DNA_AND_SPECIES(C) if((!(C.dna)) || (!(C.dna.species))) return
+#define CHECK_DNA_AND_SPECIES(C) if(!(C.dna?.species)) return
 
 //Defines copying names of mutations in all cases, make sure to change this if you change mutation's type
 #define HULK		/datum/mutation/human/hulk
@@ -28,6 +28,7 @@
 #define SWEDISH		/datum/mutation/human/swedish
 #define CHAV		/datum/mutation/human/chav
 #define ELVIS		/datum/mutation/human/elvis
+#define MEDIEVAL	/datum/mutation/human/medieval
 #define RADIOACTIVE	/datum/mutation/human/radioactive
 #define GLOWY		/datum/mutation/human/glow
 #define ANTIGLOWY	/datum/mutation/human/glow/anti

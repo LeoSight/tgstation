@@ -358,16 +358,15 @@
 	else
 		. += "<span class='info'>It's empty.</span>"
 
-	. += "<span class='info'>Water: [waterlevel]/[maxwater].</span>\n"+\
-	"<span class='info'>Nutrient: [reagents.total_volume]/[maxnutri].</span>"
+	. += "<span class='info'>Water: [waterlevel]/[maxwater].</span>"
+	. += "<span class='info'>Nutrient: [reagents.total_volume]/[maxnutri].</span>"
 	if(self_sustaining)
 		. += "<span class='info'>The tray's autogrow is active, protecting it from species mutations, weeds, and pests.</span>"
 
 	if(weedlevel >= 5)
-		to_chat(user, "<span class='warning'>It's filled with weeds!</span>")
+		. += "<span class='warning'>It's filled with weeds!</span>"
 	if(pestlevel >= 5)
-		to_chat(user, "<span class='warning'>It's filled with tiny worms!</span>")
-	to_chat(user, "" )
+		. += "<span class='warning'>It's filled with tiny worms!</span>"
 
 /**
  * What happens when a tray's weeds grow too large.
@@ -658,7 +657,7 @@
 		if(!myseed)
 			to_chat(user, "<span class='notice'>The tray is empty.</span>")
 			return
-		if(plant_health <= 15)
+		if(plant_health <= GENE_SHEAR_MIN_HEALTH)
 			to_chat(user, "<span class='notice'>This plant looks too unhealty to be sheared right now.</span>")
 			return
 
@@ -673,6 +672,10 @@
 		if(removed_trait == null)
 			return
 		if(!user.canUseTopic(src, BE_CLOSE))
+			return
+		if(!myseed)
+			return
+		if(plant_health <= GENE_SHEAR_MIN_HEALTH) //Check health again to make sure they're not keeping inputs open to get free shears.
 			return
 		for(var/datum/plant_gene/gene in myseed.genes)
 			if(gene.name == removed_trait)
@@ -785,7 +788,7 @@
 		TRAY_NAME_UPDATE
 	else
 		if(user)
-			examine(user)
+			user.examinate(src)
 
 /obj/machinery/hydroponics/CtrlClick(mob/user)
 	. = ..()

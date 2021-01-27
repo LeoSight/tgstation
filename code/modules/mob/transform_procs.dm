@@ -25,12 +25,13 @@
 	icon = initial(icon)
 	invisibility = 0
 	set_species(/datum/species/monkey)
+	uncuff()
 	return src
 
 //////////////////////////           Humanize               //////////////////////////////
 //Could probably be merged with monkeyize but other transformations got their own procs, too
 
-/mob/living/carbon/proc/humanize()
+/mob/living/carbon/proc/humanize(species = /datum/species/human)
 	if (notransform || transformation_timer)
 		return
 
@@ -45,15 +46,15 @@
 	invisibility = INVISIBILITY_MAXIMUM
 
 	new /obj/effect/temp_visual/monkeyify/humanify(loc)
-	transformation_timer = addtimer(CALLBACK(src, .proc/finish_humanize), TRANSFORMATION_DURATION, TIMER_UNIQUE)
+	transformation_timer = addtimer(CALLBACK(src, .proc/finish_humanize, species), TRANSFORMATION_DURATION, TIMER_UNIQUE)
 
-/mob/living/carbon/proc/finish_humanize()
+/mob/living/carbon/proc/finish_humanize(species = /datum/species/human)
 	transformation_timer = null
 	to_chat(src, "<B>You are now a human.</B>")
 	notransform = FALSE
 	icon = initial(icon)
 	invisibility = 0
-	set_species(/datum/species/human)
+	set_species(species)
 	return src
 
 /mob/living/carbon/human/AIize(transfer_after = TRUE, client/preference_source)
@@ -76,20 +77,24 @@
 	invisibility = INVISIBILITY_MAXIMUM
 	return ..()
 
-/mob/proc/AIize(transfer_after = TRUE, client/preference_source)
+/mob/proc/AIize(transfer_after = TRUE, client/preference_source, move = TRUE)
 	var/list/turf/landmark_loc = list()
-	for(var/obj/effect/landmark/start/ai/sloc in GLOB.landmarks_list)
-		if(locate(/mob/living/silicon/ai) in sloc.loc)
-			continue
-		if(sloc.primary_ai)
-			LAZYCLEARLIST(landmark_loc)
-			landmark_loc += sloc.loc
-			break
-		landmark_loc += sloc.loc
-	if(!landmark_loc.len)
-		to_chat(src, "Oh god sorry we can't find an unoccupied AI spawn location, so we're spawning you on top of someone.")
+
+	if(!move)
+		landmark_loc += loc
+	else
 		for(var/obj/effect/landmark/start/ai/sloc in GLOB.landmarks_list)
+			if(locate(/mob/living/silicon/ai) in sloc.loc)
+				continue
+			if(sloc.primary_ai)
+				LAZYCLEARLIST(landmark_loc)
+				landmark_loc += sloc.loc
+				break
 			landmark_loc += sloc.loc
+		if(!landmark_loc.len)
+			to_chat(src, "Oh god sorry we can't find an unoccupied AI spawn location, so we're spawning you on top of someone.")
+			for(var/obj/effect/landmark/start/ai/sloc in GLOB.landmarks_list)
+				landmark_loc += sloc.loc
 
 	if(!landmark_loc.len)
 		message_admins("Could not find ai landmark for [src]. Yell at a mapper! We are spawning them at their current location.")
