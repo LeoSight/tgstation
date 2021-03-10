@@ -67,6 +67,7 @@
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	attack_sound = 'sound/weapons/bite.ogg'
+	attack_vis_effect = ATTACK_EFFECT_BITE
 	unique_name = 1
 	gold_core_spawnable = HOSTILE_SPAWN
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
@@ -661,6 +662,23 @@
 	color = rgb(114,228,250)
 	gold_core_spawnable = NO_SPAWN
 	menu_description = "Fast ice spider variant specializing in catching running prey, but has less health. Immune to temperature damage. Frost oil injection of 10u per bite."
+
+/**
+ * # Scrawny Hunter Spider
+ *
+ * A hunter spider that trades damage for health, unable to smash enviroments.
+ *
+ * Mainly used as a minor threat in abandoned places, such as areas in maintenance or a ruin.
+ */
+/mob/living/simple_animal/hostile/poison/giant_spider/hunter/scrawny
+	name = "scrawny spider"
+	environment_smash = 0
+	health = 60
+	maxHealth = 60
+	melee_damage_lower = 5
+	melee_damage_upper = 10
+	desc = "Furry and black, it makes you shudder to look at it. This one has sparkling purple eyes, and looks abnormally thin and frail."
+	menu_description = "Fast spider variant specializing in catching running prey, but has less damage than a normal hunter spider at the cost of more health. Toxin injection of 10u per bite."
 
 /**
  * # Flesh Spider
